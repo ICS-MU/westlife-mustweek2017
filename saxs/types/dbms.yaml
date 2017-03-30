@@ -1,0 +1,20 @@
+node_types:
+  example.nodes.DBMS:
+    #derived_from: cloudify.nodes.DBMS
+    derived_from: example.nodes.puppet.SoftwareComponent
+
+  example.nodes.MonitoredDBMS:
+    #derived_from: example.nodes.DBMS
+    derived_from: example.nodes.puppet.SoftwareComponent
+    interfaces:
+      cloudify.interfaces.monitoring:
+        start:
+          implementation: diamond.diamond_agent.tasks.add_collectors
+          inputs:
+            collectors_config: &dbms_collectors
+              default:
+                LoadAverageCollector: {}
+        stop:
+          implementation: diamond.diamond_agent.tasks.del_collectors
+          inputs:
+            collectors_config: *dbms_collectors

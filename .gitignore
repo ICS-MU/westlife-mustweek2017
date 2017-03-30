@@ -1,25 +1,16 @@
 # Cloudify local storage
-apache/local-storage/
-torque/local-storage/
-saxs/local-storage/
+**/local-storage
 
 apache/resources/ssh/
 torque/resources/ssh/
 saxs/resources/ssh/
 
-apache/resources/puppet.tar.gz
-torque/resources/puppet.tar.gz
-saxs/resources/puppet.tar.gz
+puppet.tar.gz
 
-apache/cfy-example-blueprint.yaml
-apache/cfy-example-inputs.yaml
+cfy-example-blueprint.yaml
+cfy-example-inputs.yaml
 
-torque/cfy-example-blueprint.yaml
-torque/cfy-example-inputs.yaml
-
-saxs/cfy-example-blueprint.yaml
-saxs/cfy-example-inputs.yaml
-
+cfy.log
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
