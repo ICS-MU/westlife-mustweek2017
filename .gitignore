@@ -1,0 +1,83 @@
+# Cloudify local storage
+apache/local-storage/
+torque/local-storage/
+saxs/local-storage/
+
+apache/resources/ssh/
+torque/resources/ssh/
+saxs/resources/ssh/
+
+apache/resources/puppet.tar.gz
+torque/resources/puppet.tar.gz
+saxs/resources/puppet.tar.gz
+
+apache/cfy-example-blueprint.yaml
+apache/cfy-example-inputs.yaml
+
+torque/cfy-example-blueprint.yaml
+torque/cfy-example-inputs.yaml
+
+saxs/cfy-example-blueprint.yaml
+saxs/cfy-example-inputs.yaml
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+bin/
+build/
+develop-eggs/
+dist/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
+# Django stuff:
+*.log
+*.pot
+
+# Sphinx documentation
+docs/_build/
+
+*.iml
+
+*COMMIT_MSG
+
+# QuickBuild
+.qbcache/
