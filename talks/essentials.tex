@@ -118,24 +118,44 @@
 \begin{itemize}
 \item In your Docker container (\code{radimpesa/mustweek2017})
 \begin{itemize}
-\item initialize cloudify: \code{\# source \$HOME/cfy/bin/activate}
-\item do a fresh clone of \texttt{git@github.com:ICS-MU/westlife-mustweek2017.git}
-\item look into \texttt{apache/} folder
+\item do a fresh clone of \code{git@github.com:ICS-MU/westlife-mustweek2017.git}
+\item look into \code{apache/} folder
 \end{itemize}
 
 \item M4 preprocessing to distinguish local vs.\ CFM deployment 
 \begin{itemize}
-\item ignore today, just don't edit the generated \texttt{.yaml} files
+\item ignore today, just don't edit the generated \code{.yaml} files
 \end{itemize}
-\item browse the \texttt{.yaml} files 
+\item browse the \code{.yaml} files and ask about their meaning
 \begin{itemize}
 \item blueprint and inputs in the main 
+\item \code{types/} folder
 \end{itemize}
-\item deploy: \code{\# make cfy-deploy}
+\item briefly look into the deployment script 
 \begin{itemize}
-\item check the result, see \code{\# cfy local outputs}
+\item \code{scripts/puppet/runner.sh}
+\item prepares and invokes Puppet 
+\item this is the real stuff, no need to understand details now
 \end{itemize}
-\item cleanup: \code{\# make cfy-undeploy}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Understand the homework}
+\begin{itemize}
+\item Initialize Cloudify:\\ \code{\# source \$HOME/cfy/bin/activate}
+\item Put something unique into:\\
+\code{resources/puppet/site/helloworld/files/index.py}
+\item Deploy:\\
+\code{\# make clean \&\& make cfy-deploy}
+\begin{itemize}
+\item check the result, see:\\ \code{\# cfy local outputs}
+\item ssh to the deployed node:\\
+\code{\# ssh -i resources/ssh/id\_rsa cfy@\emph{the\_endpoint\_IP}}
+\item point you web browser to:\\
+\code{http://\emph{the\_endpoint\_IP}/cgi-bin/index.py}
+\end{itemize}
+\item Cleanup:\\
+\code{\# make cfy-undeploy}
 \end{itemize}
 
 \end{frame}
