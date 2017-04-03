@@ -33,4 +33,6 @@ os_availability_zone: 'uuid_fedcloud_cerit_sc_103'
 resource_tpl: 'mem_small'
 #resource_tpl:  'extra_large'
 
+imp_url: http://TODO
+
 # vim: set syntax=yaml

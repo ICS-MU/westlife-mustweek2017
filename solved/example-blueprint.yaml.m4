@@ -57,6 +57,10 @@ inputs:
   os_availability_zone:
     type: string
 
+  # IMP library download URL
+  imp_url:
+    type: string
+
 dsl_definitions:
   occi_configuration: &occi_configuration
     endpoint: { get_input: occi_endpoint }

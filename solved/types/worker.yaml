@@ -1,0 +1,8 @@
+node_types:
+  example.nodes.worker:
+    derived_from: example.nodes.Server
+    properties:
+      imp_url:
+        default: http://nowhere.com/
+
+# XXX: no CFM variant yet
