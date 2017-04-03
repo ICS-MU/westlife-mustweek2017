@@ -14,6 +14,7 @@ imports:
   - types/dbms.yaml
   - types/server.yaml
   - types/webserver.yaml
+  - types/worker.yaml
 
 inputs:
   # OCCI
@@ -225,12 +226,13 @@ node_templates:
                 manifest: manifests/torque_server.pp  # rekonfigurace serveru
 
   saxsWorker:
-    type: _NODE_WEBSERVER_
+    type: example.nodes.worker
     instances:
       deploy: 1
     properties:
       fabric_env:
         <<: *fabric_env
+      imp_url: { get_input: imp_url }
     interfaces:
       cloudify.interfaces.lifecycle:
         create:

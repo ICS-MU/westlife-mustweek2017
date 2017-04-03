@@ -1,6 +1,6 @@
 node_types:
   example.nodes.worker:
-    derived_from: example.nodes.Server
+    derived_from: example.nodes.WebServer
     properties:
       imp_url:
         default: http://nowhere.com/

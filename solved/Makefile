@@ -23,11 +23,11 @@ cfm-$(BLUEPRINT): $(M4BLUEPRINT)
 # inputs
 inputs: cfy-$(INPUTS) cfm-$(INPUTS)
 
-cfy-$(INPUTS): $(M4INPUTS) resources/ssh/id_rsa
+cfy-$(INPUTS): $(M4INPUTS) resources/ssh/id_rsa resources/ssh/id_rsa_saxs
 	m4 $(M4INPUTS) >".$@"
 	mv ".$@" $@
 
-cfm-$(INPUTS): $(M4INPUTS) resources/ssh/id_rsa
+cfm-$(INPUTS): $(M4INPUTS) resources/ssh/id_rsa resources/ssh/id_rsa_saxs
 	m4 -D_CFM_ -D_CFM_BLUEPRINT_=$(CFM_BLUEPRINT) $(M4INPUTS) >".$@"
 	mv ".$@" $@
 
@@ -53,9 +53,9 @@ cfm-test: cfm-deploy cfm-exec-uninstall cfm-clean
 
 ### Resources ####################################
 
-resources/ssh/id_rsa:
+resources/ssh/id_rsa resources/ssh/id_rsa_saxs:
 	mkdir -p resources/ssh/
-	ssh-keygen -N '' -f resources/ssh/id_rsa
+	ssh-keygen -N '' -f $@
 
 resources/puppet.tar.gz: resources/puppet/
 	tar -czvf $@ -C $? .

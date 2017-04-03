@@ -33,6 +33,6 @@ worker_resource_tpl: 'mem_small'
 worker_availability_zone: 'uuid_fedcloud_cerit_sc_103'
 worker_scratch_size: 15
 
-imp_url: http://TODO
+imp_url: https://integrativemodeling.org/2.6.2/download/IMP-2.6.2-1.el7.centos.x86_64.rpm
 
 # vim: set syntax=yaml
