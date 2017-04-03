@@ -25,8 +25,12 @@ ScriptAlias / /var/www/saxs/run.cgi/
 </Directory>
 EOF
 
+adduser saxs
+usermod -g saxs apache
+
 # Setup SAXS portal application
 #TODO Extract saxs-portal.tar.gz to /var/www
+# Set owner:group to apache:saxs
 
 cd /var/www/saxs
 virtualenv flask
@@ -37,8 +41,7 @@ pip install -r requirements.txt &>/dev/null
 mkdir -p /var/www/SaxsExperiments/1
 python /var/www/saxs/db_create.py
 sqlite3 /var/www/SaxsExperiments/app.db "insert into users values (1,'John Hacker','john.hacker@somewhere.com','john.hacker@somewhere.com',1,1);"
-adduser saxs
-usermod -g saxs apache
+
 sed -i 's/Group apache/Group saxs/' /etc/httpd/conf/httpd.conf
 chown -R apache:saxs /var/www/SaxsExperiments
 
