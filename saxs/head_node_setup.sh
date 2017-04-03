@@ -26,7 +26,8 @@ ScriptAlias / /var/www/saxs/run.cgi/
 EOF
 
 adduser saxs
-usermod -g saxs apache
+usermod -G saxs,apache apache
+usermod -G saxs,apache saxs
 
 # Setup SAXS portal application
 #TODO Extract saxs-portal.tar.gz to /var/www
