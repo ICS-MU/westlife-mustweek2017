@@ -30,13 +30,17 @@ function puppet_recipes() {
         mkdir -p "${1}"
         PC_DOWNLOAD=$(ctx ${CTX_SIDE} node properties 'puppet_config.download')
         MANIFESTS_FILE=$(ctx download-resource ${PC_DOWNLOAD})
-        tar -xvf ${MANIFESTS_FILE} -C ${1}
+        echo -n 'Puppet: extracting recipes '
+        tar -xf ${MANIFESTS_FILE} -C ${1}
+	echo '... done'
 
         # install modules
         cd ${1}
         PUPPETFILE="${1}/Puppetfile"
+        echo -n 'Puppet: installing modules '
         test -f ${PUPPETFILE} && \
             sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install ${PUPPETFILE}
+	echo '... done'
     fi
 }
 
@@ -61,6 +65,7 @@ EOF
 # generate external facts
 function puppet_facts() {
     export FACTER_CLOUDIFY_CTX_TYPE=${CTX_TYPE}
+    export FACTER_CLOUDIFY_CTX_OPERATION_NAME=${CTX_OPERATION_NAME}
     export FACTER_CLOUDIFY_CTX_SIDE=${CTX_SIDE}
     export FACTER_CLOUDIFY_CTX_INSTANCE_ID=${CTX_INSTANCE_ID}
     export FACTER_CLOUDIFY_CTX_INSTANCE_HOST_IP=${CTX_INSTANCE_HOST_IP}
@@ -116,7 +121,9 @@ puppet_facts "${FACTS_DIR}"
 cd ${MANIFESTS}
 
 # run Puppet
+echo "Puppet: running manifest ${MANIFEST}"
 sudo -E /opt/puppetlabs/bin/puppet apply \
     --hiera_config="${HIERA_DIR}/hiera.yaml" \
     --modulepath="${MANIFESTS}/modules:${MANIFESTS}/site:${FACTS_DIR}" \
     --verbose ${MANIFEST}
+echo 'Puppet: done'
