@@ -52,7 +52,7 @@ chown -R apache:saxs /var/www/SaxsExperiments
 
 
 mkdir ~saxs/.ssh
-ctx download-resource resources/ssh/id_rsa_saxs.pub '@{"target_path": "/tmp/id_rsa_saxs.pub"}
+ctx download-resource resources/ssh/id_rsa_saxs.pub '@{"target_path": "/tmp/id_rsa_saxs.pub"}'
 cat /tmp/id_rsa_saxs.pub >>~saxs/.ssh/authorized_keys
 
 chown -R saxs ~saxs/.ssh
