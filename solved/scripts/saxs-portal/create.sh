@@ -31,10 +31,15 @@ ScriptAlias / /var/www/saxs/run.cgi/
 </Directory>
 EOF
 
+adduser saxs
+usermod -G saxs,apache apache
+usermod -G saxs,apache saxs
+
 # Setup SAXS portal application
 ctx logger info "Setting up web interface"
 ctx download-resource resources/saxs-portal/saxs-portal.tar.gz '@{"target_path": "/tmp/saxs-portal.tar.gz"}'
 tar xvzf /tmp/saxs-portal.tar.gz -C /var/www
+chown -R apache:saxs /var/www/saxs
 cd /var/www/saxs
 virtualenv flask
 source flask/bin/activate
@@ -45,8 +50,7 @@ ctx logger info "Configuring database"
 mkdir -p /var/www/SaxsExperiments/1
 python /var/www/saxs/db_create.py
 sqlite3 /var/www/SaxsExperiments/app.db "insert into users values (1,'John Hacker','john.hacker@somewhere.com','john.hacker@somewhere.com',1,1);"
-adduser saxs
-usermod -g saxs apache
+
 sed -i 's/Group apache/Group saxs/' /etc/httpd/conf/httpd.conf
 chown -R apache:saxs /var/www/SaxsExperiments
 
