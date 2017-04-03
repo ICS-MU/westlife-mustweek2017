@@ -16,8 +16,9 @@ ctx logger info "Downloading $imprpm"
 wget $imprpm
 yum -y -d1 localinstall `basename $imprpm`
 
-ctx download-resource resources/saxs-worker/ensamble-fit '@{"target_path": "/usr/local/bin/ensamble-fit"}'
-ctx download-resource resources/saxs-worker/foxs '@{"target_path": "/usr/local/bin/foxs"}'
+ctx download-resource resources/saxs-worker/ensamble-fit '@{"target_path": "/tmp/ensamble-fit"}'
+mv /tmp/ensamble-fit /usr/local/bin/
+chmod +x /usr/local/bin/ensamble-fit
 
 adduser saxs
 mkdir ~saxs/.ssh
