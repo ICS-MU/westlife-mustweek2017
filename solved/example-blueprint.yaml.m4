@@ -119,6 +119,28 @@ node_templates:
       - type: cloudify.relationships.contained_in
         target: apacheNode
 
+  saxsPortal:
+    type: _NODE_WEBSERVER_
+    instances:
+      deploy: 1
+    properties:
+      fabric_env:
+        <<: *fabric_env
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path: scripts/saxs-portal/create.sh
+        start:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path: scripts/saxs-portal/run.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: apacheNode
+      - type: cloudify.relationships.depends_on
+        target: apache
 
 outputs:
   endpoint:
