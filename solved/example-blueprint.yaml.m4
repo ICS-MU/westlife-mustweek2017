@@ -220,6 +220,23 @@ node_templates:
               inputs:
                 manifest: manifests/torque_server.pp  # rekonfigurace serveru
 
+  saxsWorker:
+    type: _NODE_WEBSERVER_
+    instances:
+      deploy: 1
+    properties:
+      fabric_env:
+        <<: *fabric_env
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path: scripts/saxs-worker/create.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: workerNode
+
 groups:
   workerNodes:
     members: [workerNode]
