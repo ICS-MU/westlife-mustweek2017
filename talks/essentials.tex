@@ -19,15 +19,54 @@
 \end{frame}
 
 \begin{frame}{Why to virtualize web portals}
+\begin{itemize}
+
+\item{Web portal advantages}
+\begin{itemize}
+\item the user is scientist, not IT enthusiast
+\item shield him/her from complexity of application and infrastructure
+\item easy use, reproducible results
+\end{itemize}
+
+\item{Drawbacks}
+\begin{itemize}
+\item application and infra are complex, the portal is twice more
+\item hand-crafted, ``don't touch and run for ever''
+\end{itemize}
+
+\item{Go to cloud}
+\begin{itemize}
+\item reproducible, automated deployment
+\item for user: more flexible and scalable setup
+\item for portal manager: more initial work but it pays
+\end{itemize}
+\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Available sofware solutions}
-
+\begin{frame}{Available software solutions}
+\begin{itemize}
+\item Many cloud orchestration and configuration management tools exist
+\begin{itemize}
+\item brief overview in West-life D4.1
+\item thorough survey in INDIGO-Datacloud deliverables
+\end{itemize}
+\item Pragmatic choice for initial West-life solutions
+\begin{itemize}
+\item \textbf{Cloudify} -- cloud orchestration (before 1st INDIGO release was available)
+\item \textbf{Puppet} -- configuration management (long term experience with us) 
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Typical portal architecture}
 
+\end{frame}
+
+\begin{frame}{Final picture}
+\begin{center}
+\includegraphics[width=.9\hsize]{P_virt.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}{Deployment bottom-up}
@@ -180,7 +219,8 @@
 \item put them to \code{scripts/saxs-portal/}
 \item runs unpriviledged -- use \code{sudo}
 \item adapt (and break up) simple installation script \todo and tarballs from \code{saxs/}
-\item use \code{ctx} ``shell API'' to suck in cloudify resources (tarballs etc.)
+\item use \code{ctx} ``shell API'' to suck in cloudify resources (tarballs etc.) \\
+\code{ctx download-resource resources/\emph{your/path/to/file} @\{"target\_path": "/tmp/destfile"\}'}
 \end{itemize}
 \end{itemize}
 \end{frame}
