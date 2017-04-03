@@ -60,7 +60,20 @@
 \end{frame}
 
 \begin{frame}{Typical portal architecture}
-
+\begin{itemize}
+\item Web front-end
+\item Spool storage -- one folder per job 
+\begin{itemize}
+\item may have complex internal structure, long or short lived
+\end{itemize}
+\item  Machinery to handle computation
+\begin{itemize}
+\item triggered by changes in spool directory
+\item either ``local'' lightweight calculation or remote jobs 
+\end{itemize}
+\item interface to AAI (user AuthN/Z, accouting)
+\item interface to batch system or grid
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Final picture}
@@ -70,10 +83,44 @@
 \end{frame}
 
 \begin{frame}{Deployment bottom-up}
+\begin{itemize}
+\item cloud nodes providers -- EGI FedCloud sites
+\item cloud management systems -- OpenStack, OpenNebula, \dots (mostly hidden)
+\item access interface -- OCCI, standard, hides management systems
+\item orchestration (coordinated deployent) -- Cloudify (local, touches of CFM), Indigo solutions
+\end{itemize}
 
 \end{frame}
 
 \begin{frame}{Deployment top-down}
+\begin{itemize}
+\item blueprint and node types
+\begin{itemize}
+\item node can be VM, installed software, specific configuration action, \dots
+\item relationships among them (inclusion, dependencies, \dots)
+\item lifecycle phases (create, configure, start, stop, \dots)
+\end{itemize}
+\item  inputs -- specific parameters for one deployment
+\begin{itemize}
+\item to keep the same blueprint
+\end{itemize}
+\item scripts to implement non-default lifecycle phases
+\item resources -- any data used in at any stage
+\begin{itemize}
+\item ssh keys, configuration files, tarballs to expand, \dots
+\end{itemize}
+\item plugins
+\begin{itemize}
+\item highly modular architecture, anything can be (re)implemented by plugin
+\item \textbf{fabric} -- execute remote commands
+\item \textbf{occi} -- create VMs
+\end{itemize}
+\item software install and configuration
+\begin{itemize}
+\item Puppet -- the real way, used as blackbox today
+\item hand-made scripts -- manageable in tutorial
+\end{itemize}
+\end{itemize}
 
 \end{frame}
 
@@ -163,6 +210,7 @@
 \item look into \code{apache/} folder
 \end{itemize}
 
+\item These slides in \code{talks/} folder
 \item M4 preprocessing to distinguish local vs.\ CFM deployment 
 \begin{itemize}
 \item ignore today, just don't edit the generated \code{.yaml} files
@@ -218,7 +266,7 @@
 \item ``poor-man'' quick solution (professional would use puppet \dots)
 \item put them to \code{scripts/saxs-portal/}
 \item runs unpriviledged -- use \code{sudo}
-\item adapt (and break up) simple installation script \todo and tarballs from \code{saxs/}
+\item adapt (and break up) simple installation script and tarballs from \code{saxs/}
 \item use \code{ctx} ``shell API'' to suck in cloudify resources (tarballs etc.) \\
 \code{ctx download-resource resources/\emph{your/path/to/file} @\{"target\_path": "/tmp/destfile"\}'}
 \end{itemize}
@@ -237,9 +285,10 @@
 \begin{itemize}
 \item get inspiration from the web application deployment
 \end{itemize}
-\item Ensure SSH keys are installed to copy files between head and worker nodes
+\item generate SSH keys for the \code{saxs} user
 \begin{itemize}
-\item \todo
+\item add key generation to Makefile
+\item access it via \code{ctx} API in the installation script
 \end{itemize}
 \item Enable job management (\code{/usr/local/saxs/saxsd.sh})
 \item \alert{It should work end-to-end now}
