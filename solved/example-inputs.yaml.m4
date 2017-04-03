@@ -25,12 +25,12 @@ cc_private_key_filename: 'ifdef(`_CFM_',`/opt/manager/resources/blueprints/_CFM_
 
 # Instance template/sizing
 os_tpl: 'uuid_gputest_egi_centos_7_cerit_sc_188'
-#os_tpl: 'uuid_egi_centos_7_fedcloud_warg_149'
-#os_tpl: 'uuid_enmr_centos_7_fedcloud_warg_152'
-
 os_availability_zone: 'uuid_fedcloud_cerit_sc_103'
-
 resource_tpl: 'mem_small'
-#resource_tpl:  'extra_large'
+
+worker_os_tpl: 'uuid_gputest_egi_centos_7_cerit_sc_188'
+worker_resource_tpl: 'mem_small'
+worker_availability_zone: 'uuid_fedcloud_cerit_sc_103'
+worker_scratch_size: 15
 
 # vim: set syntax=yaml
