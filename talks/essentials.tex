@@ -6,6 +6,8 @@
 \def\code#1{\structure{\texttt{#1}}}
 \def\nadpis#1{\par\medskip\textbf{#1}}
 
+\def\todo{{\color{red}\textbf{TODO}}}
+
 \begin{document}
 \makeatletter
 
@@ -157,8 +159,55 @@
 \item Cleanup:\\
 \code{\# make cfy-undeploy}
 \end{itemize}
-
 \end{frame}
 
+\begin{frame}{Deploy web application}
+\begin{itemize}
+\item To speed up, start with the \code{apache/} example
+\begin{itemize}
+\item copy \code{Makefile}, blueprint and inputs, \code{types/}, and
+\code{\{scripts,resources\}/puppet}
+\end{itemize}
+\item add ``software'' node to the blueprint
+\begin{itemize}
+\item contained in \code{apacheNode} (see \code{relationships} section)
+\item started after \code{apache} node (\code{depens\_on} relationship)
+\item use fabric plugin to start scripts
+\end{itemize}
+\item Installation, configuration, and start scripts
+\begin{itemize}
+\item ``poor-man'' quick solution (professional would use puppet \dots)
+\item put them to \code{scripts/saxs-portal/}
+\item runs unpriviledged -- use \code{sudo}
+\item adapt (and break up) simple installation script \todo and tarballs from \code{saxs/}
+\item use \code{ctx} ``shell API'' to suck in cloudify resources (tarballs etc.)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Add worker node}
+\begin{itemize}
+\item Pick the other example in \code{torque/}
+\begin{itemize}
+\item appropriate pieces of blueprint and inputs
+\item puppet resources (\code{manifests/} and \code{site/*}) -- just copy, no need to touch them
+\item merge into results of previous step
+\end{itemize}
+\item Deploy application sofware to the worker node
+\begin{itemize}
+\item get inspiration from the web application deployment
+\end{itemize}
+\item Ensure SSH keys are installed to copy files between head and worker nodes
+\begin{itemize}
+\item \todo
+\end{itemize}
+\item Enable job management (\code{/usr/local/saxs/saxsd.sh})
+\item \alert{It should work end-to-end now}
+\begin{itemize}
+\item test with sample data from \code{saxs/}
+\end{itemize}
+\end{itemize}
+
+\end{frame}
 
 \end{document}
