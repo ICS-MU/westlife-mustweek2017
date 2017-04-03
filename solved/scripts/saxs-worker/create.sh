@@ -25,7 +25,7 @@ chmod +x /usr/local/bin/foxs
 adduser saxs
 
 mkdir ~saxs/.ssh
-ctx download-resource resources/ssh/id_rsa_saxs '@{"target_path": "/tmp/id_rsa_saxs"}
+ctx download-resource resources/ssh/id_rsa_saxs '@{"target_path": "/tmp/id_rsa_saxs"}'
 mv /tmp/id_rsa_saxs ~saxs/.ssh/id_rsa
 
 chown -R saxs ~saxs/.ssh
