@@ -14,6 +14,7 @@ imports:
   - types/dbms.yaml
   - types/server.yaml
   - types/webserver.yaml
+  - types/worker.yaml
 
 inputs:
   # OCCI
@@ -67,6 +68,9 @@ inputs:
     type: integer
 
 
+  # IMP library download URL
+  imp_url:
+    type: string
 
 dsl_definitions:
   occi_configuration: &occi_configuration
@@ -220,6 +224,25 @@ node_templates:
             establish:
               inputs:
                 manifest: manifests/torque_server.pp  # rekonfigurace serveru
+
+  saxsWorker:
+    type: example.nodes.worker
+    instances:
+      deploy: 1
+    properties:
+      fabric_env:
+        <<: *fabric_env
+      imp_url: { get_input: imp_url }
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path: scripts/saxs-worker/create.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: workerNode
+
 groups:
   workerNodes:
     members: [workerNode]

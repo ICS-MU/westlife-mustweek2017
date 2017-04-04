@@ -54,6 +54,16 @@ sqlite3 /var/www/SaxsExperiments/app.db "insert into users values (1,'John Hacke
 sed -i 's/Group apache/Group saxs/' /etc/httpd/conf/httpd.conf
 chown -R apache:saxs /var/www/SaxsExperiments
 
+
+mkdir ~saxs/.ssh
+ctx download-resource resources/ssh/id_rsa_saxs.pub '@{"target_path": "/tmp/id_rsa_saxs.pub"}'
+cat /tmp/id_rsa_saxs.pub >>~saxs/.ssh/authorized_keys
+
+chown -R saxs ~saxs/.ssh
+chmod 700 ~saxs/.ssh
+chmod 600 ~saxs/.ssh/authorized_keys
+
+
 # Install server-side scripts
 ctx logger info "Setting up submission server"
 ctx download-resource resources/saxs-portal/saxs-server.tar.gz '@{"target_path": "/tmp/saxs-server.tar.gz"}'
