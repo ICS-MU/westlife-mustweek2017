@@ -1,0 +1,20 @@
+node_types:
+  example.nodes.Server:
+    derived_from: example.nodes.puppet.server
+    properties:
+      install_agent:
+        default: False
+
+  example.nodes.MonitoredServer:
+    derived_from: example.nodes.puppet.server
+    interfaces:
+      cloudify.interfaces.monitoring_agent:
+        install:
+          implementation: diamond.diamond_agent.tasks.install
+          inputs:
+            diamond_config:
+              default:
+                interval: 10
+        start: diamond.diamond_agent.tasks.start
+        stop: diamond.diamond_agent.tasks.stop
+        uninstall: diamond.diamond_agent.tasks.uninstall
