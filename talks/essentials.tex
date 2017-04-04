@@ -290,13 +290,37 @@
 \item add key generation to Makefile
 \item access it via \code{ctx} API in the installation script
 \end{itemize}
+\item Add \code{saxsWorker} node 
+\begin{itemize}
+\item similar to saxsPortal
+\item use \code{saxs/worker\_node\_setup.sh} to start with
+\item copy in and install \code{ensamle-fit} binary
+\end{itemize}
 \item Enable job management (\code{/usr/local/saxs/saxsd.sh})
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Add worker node}
+\begin{itemize}
+\item Install IMP library  -- quick, dirty way:\\
+\code{wget https://integrativemodeling.org/2.6.2/download/IMP-2.6.2-1.el7.centos.x86\_64.rpm
+}
+into the \code{create.sh} script 
+
+\item Clean way
+\begin{itemize}
+\item  extend \code{example.nodes.WebServer} to a~new node type with \code{imp\_url}
+\item  provide the value in inputs file
+\item  declare and use with \code{get\_input} in blueprint
+\item  use \code{ctx node properties imp\_url} in \code{create.sh} to retrieve the value
+\end{itemize}
+
 \item \alert{It should work end-to-end now}
 \begin{itemize}
 \item test with sample data from \code{saxs/}
 \end{itemize}
-\end{itemize}
 
+\end{itemize}
 \end{frame}
 
 \end{document}
