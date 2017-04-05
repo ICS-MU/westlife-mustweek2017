@@ -175,6 +175,17 @@ for service providers}} by AARC project
 \end{itemize}
 \end{frame}
 
+\begin{frame}{West-Life Idp-SP Proxy Service}
+%\begin{itemize}
+%\end{itemize}
+
+\begin{center}
+\includegraphics[width=.9\hsize]{westlife-proxy}
+\end{center}
+\end{frame}
+
+
+
 
 \begin{frame}{Security Assignment \#2}
 \begin{itemize}
@@ -204,5 +215,46 @@ for service providers}} by AARC project
 \end{itemize}
 
 \end{frame}
+
+
+\begin{frame}{Access Control based on Attributes}
+\begin{itemize}
+\item IdP release two pieces of information
+\begin{itemize}
+\item Information about successful authentication
+\item Additional attributes linked to the user
+\end{itemize}
+
+\item Attributes provides further information, like name, email attributes,
+affiliation, \ldots
+\item Attributes issued by a Proxy may also carry VO specific information (group membership,
+etc.)
+\item Few catches though
+\begin{itemize}
+\item Attribute release policy -- improved lately
+\item Different naming and/or semantics of attribute release by different
+IdP
+\end{itemize}
+
+\item Utilization of attributes for access control
+\begin{itemize}
+\item Access rules enforced by web server
+\item Access control implemented by the application (e.g. mapping to
+internal identities).
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Security Assignment \#2}
+\begin{itemize}
+\item Take a look at the application and try use attributes returned by the
+IdP
+\item Consult \code{https://\$HOSTNAME/auth\_test/} to see what attributes
+are returned by the IdP
+\end{itemize}
+\end{frame}
+
 
 \end{document}
