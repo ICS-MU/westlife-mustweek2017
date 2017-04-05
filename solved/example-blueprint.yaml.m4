@@ -157,6 +157,25 @@ node_templates:
       - type: cloudify.relationships.depends_on
         target: apache
 
+  saxsPortalSecured:
+    type: example.nodes.WebServer
+    instances:
+      deploy: 1
+    properties:
+      fabric_env:
+        <<: *fabric_env
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        create:
+          implementation: fabric.fabric_plugin.tasks.run_script
+          inputs:
+            script_path: scripts/security/create_security.sh
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: apacheNode
+      - type: cloudify.relationships.depends_on
+        target: saxsPortal
+
   torqueServer:
     type: _NODE_WEBSERVER_ #TODO
     instances:
